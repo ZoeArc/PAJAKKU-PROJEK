@@ -135,7 +135,7 @@ Password : 12345678
 | No | Nama | NIM | Peran |
 |---|---|---|---|
 | 1 | Muhamad Alfian Maulana | F1D02510077 | Ketua |
-| 2 | Asmaul Husna | F1D02510106 | Anggota |
+| 2 | Asmaul Husnah | F1D02510106 | Anggota |
 | 3 | Wildan Afandika | F1D02510141 | Anggota |
 | 4 | Lalu Helmi Firdaus | F1D02510119 | Anggota |
 | 5 | Tiha Karyati | F1D02510028 | Anggota |
