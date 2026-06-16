@@ -1,5 +1,13 @@
 #include <iostream>
 using namespace std;
+const string RED    = "\033[31m";
+const string GREEN  = "\033[32m";
+const string YELLOW = "\033[33m";
+const string BLUE   = "\033[34m";
+const string CYAN   = "\033[36m";
+const string WHITE  = "\033[37m";
+const string RESET  = "\033[0m";
+
 
 void bannerUtama()
 {
@@ -18,6 +26,7 @@ void manajemenKendaraanAdmin(){
     cout<<"[4] Hapus Kendaraan\n";
     cout<<"[0] Kembali\n";
     cout << "Masukkan pilihan : ";
+    cin >> pilihan;
 }
 
 void laporanPajakAdmin(){
@@ -39,7 +48,7 @@ void cariDataAdmin(){
 
 void menuAdmin()
 {
-    void bannerUtana();
+    bannerUtama();
     int pilihan;
     cout << "[1] Manajemen Kendaraan\n";
     cout << "[2] Laporan Pajak\n";
