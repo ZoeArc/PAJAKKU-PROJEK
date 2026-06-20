@@ -525,6 +525,7 @@ void menuPengguna()
     cout << "[2] Pembayaran Pajak \n";
     cout << "[3] Perhitungan Denda \n";
     cout << "[4] Riwayat Pembayaran \n";
+    cout << "[5] Cari Data Kendaraan \n";
     cout << "[0] Logout\n";
     cout << "Masukkan pilihan : ";
     int pil;
@@ -595,6 +596,107 @@ void daftarAkun() {
     totalPengguna++;
     
     cout << GREEN << endl << "[SISTEM] Registrasi berhasil! Silahkan login." << endl << RESET;
+}
+
+void cariDataPengguna() {
+    int pilihan;
+    do {
+        system("cls");
+        cout << "========================================\n";
+        cout << "            MENU PENCARIAN DATA         \n";
+        cout << "========================================\n";
+        cout << "[1] Cari Berdasarkan Plat Nomor\n";
+        cout << "[2] Cari Berdasarkan Nama Pemilik\n";
+        cout << "[0] Kembali\n";
+        cout << "----------------------------------------\n";
+        cout << "Masukkan pilihan : ";
+        cin >> pilihan;
+
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << RED << "\n[Error] Input harus berupa angka!\n" << RESET;
+            cout << "\nTekan Enter untuk melanjutkan...";
+            cin.get();
+            continue;
+        }
+
+        if (pilihan == 1) {
+            if (jumlahKendaraan == 0) {
+                cout << RED << "\n[Peringatan] Belum ada data kendaraan yang terdaftar!\n" << RESET;
+                cout << "\nTekan Enter untuk melanjutkan...";
+                cin.ignore();
+                cin.get();
+                continue;
+            }
+
+            string cariPlat;
+            cin.ignore();
+            cout << "\nMasukkan Plat Nomor yang dicari: ";
+            getline(cin, cariPlat);
+
+            bool ditemukan = false;
+            for (int i = 0; i < jumlahKendaraan; i++) {
+                if (platNomor[i].find(cariPlat) != string::npos) {
+                    cout << "  Detail Informasi Kendaraan:" << endl;
+                    cout << "  - Nomor Plat        : " << platNomor[i] << endl;
+                    cout << "  - Nama Pemilik      : " << namaPemilik[i] << endl;
+                    cout << "  - Jenis Kendaraan   : " << jenisKendaraan[i] << endl;
+                    cout << "  - Pajak Tahunan     : Rp " << besarPajak[i] << endl;
+                    cout << "  --------------------------------------------------------" << endl;
+                    ditemukan = true;
+                }
+            }
+
+            if (!ditemukan) {
+                cout << RED << "  [Sistem] Data dengan plat nomor '" << cariPlat << "' tidak ditemukan.\n" << RESET;
+            }
+            cout << "\nTekan Enter untuk kembali...";
+            cin.get();
+        } 
+        else if (pilihan == 2) {
+            if (jumlahKendaraan == 0) {
+                cout << RED << "\n[Peringatan] Belum ada data kendaraan yang terdaftar!\n" << RESET;
+                cout << "\nTekan Enter untuk melanjutkan...";
+                cin.ignore();
+                cin.get();
+                continue;
+            }
+
+            string cariNama;
+            cin.ignore();
+            cout << "\nMasukkan Nama Pemilik yang dicari: ";
+            getline(cin, cariNama);
+
+            bool ditemukan = false;
+            for (int i = 0; i < jumlahKendaraan; i++) {
+                if (namaPemilik[i].find(cariNama) != string::npos) {
+                    cout << "  Detail Informasi Kendaraan:" << endl;
+                    cout << "  - Nomor Plat        : " << platNomor[i] << endl;
+                    cout << "  - Nama Pemilik      : " << namaPemilik[i] << endl;
+                    cout << "  - Jenis Kendaraan   : " << jenisKendaraan[i] << endl;
+                    cout << "  - Pajak Tahunan     : Rp " << besarPajak[i] << endl;
+                    cout << "  --------------------------------------------------------" << endl;
+                    ditemukan = true;
+                }
+            }
+
+            if (!ditemukan) {
+                cout << RED << "  [Sistem] Data dengan nama pemilik '" << cariNama << "' tidak ditemukan.\n" << RESET;
+            }
+            cout << "\nTekan Enter untuk kembali...";
+            cin.get();
+        } 
+        else if (pilihan == 0) {
+            cout << "\nKembali ke menu utama...\n";
+        } 
+        else {
+            cout << RED << "\nPilihan tidak valid!\n" << RESET;
+            cout << "\nTekan Enter untuk melanjutkan...";
+            cin.ignore();
+            cin.get();
+        }
+    } while (pilihan != 0);
 }
 
 void login() {
