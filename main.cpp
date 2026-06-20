@@ -42,12 +42,21 @@ void bannerUtama() {
 const int maxKendaraan = 100; 
 string platNomor[maxKendaraan];
 string namaPemilik[maxKendaraan];
+string usernamePemilik[maxKendaraan];
 string jenisKendaraan[maxKendaraan];
 int besarPajak[maxKendaraan];
 int jumlahKendaraan = 0;
 bool statusBayar[maxKendaraan] = {false};
 int denda[maxKendaraan] = {0};
-
+const int maksPengguna = 100;
+struct Pengguna {
+    string namaLengkap;
+    string username;
+    string password;
+    string admin;
+};
+int totalPengguna = 1;
+Pengguna dataPengguna[maksPengguna];
 void tambahKendaraan() {
 	hapusLayar();
     bannerUtama();
@@ -79,7 +88,32 @@ void tambahKendaraan() {
         }
         cout << RED << "[ERROR] Nama pemilik tidak boleh kosong!\n" << RESET;
     }
-    
+    while(true)
+{
+    cout << "Masukkan Username Pemilik                : ";
+    getline(cin, usernamePemilik[jumlahKendaraan]);
+
+    bool ditemukan = false;
+
+    for(int i = 0; i < totalPengguna; i++)
+    {
+        if(dataPengguna[i].username ==
+           usernamePemilik[jumlahKendaraan])
+        {
+            ditemukan = true;
+            break;
+        }
+    }
+
+    if(ditemukan)
+    {
+        break;
+    }
+
+    cout << RED
+         << "[ERROR] Username tidak terdaftar!\n"
+         << RESET;
+}
     while (true) {
         cout << "Masukkan Jenis Kendaraan (Mobil/Motor)   : ";
         getline(cin, jenisKendaraan[jumlahKendaraan]);
@@ -163,8 +197,9 @@ void editDataKendaraan() {
         cout << "Data Saat Ini:\n";
         cout << " [1] Plat Nomor    : " << platNomor[idx] << endl;
         cout << " [2] Nama Pemilik  : " << namaPemilik[idx] << endl;
-        cout << " [3] Jenis         : " << jenisKendaraan[idx] << endl;
-        cout << " [4] Pajak Tahunan : Rp " << besarPajak[idx] << endl;
+        cout << " [3] Username Pemilik : " << usernamePemilik[idx] << endl;
+        cout << " [4] Jenis         : " << jenisKendaraan[idx] << endl;
+        cout << " [5] Pajak Tahunan : Rp " << besarPajak[idx] << endl;
         cout << " [0] Selesai Mengedit\n";
         cout << "----------------------------------------------------------------------------" << endl;
         cout << "Pilih nomor komponen data yang ingin diubah : "; cin >> pilihanEdit;
@@ -183,14 +218,21 @@ void editDataKendaraan() {
             cout << GREEN << "[SISTEM] Nama pemilik berhasil diperbarui!\n" << RESET;
             pauseLayar();
         }
-        else if (pilihanEdit == 3) {
+        else if (pilihanEdit == 3){
+            cin.ignore();
+            cout << "Masukkan Username Baru : ";
+            getline(cin, usernamePemilik[idx]);
+            cout << GREEN << "[SISTEM] Username berhasil diperbarui!\n" << RESET;
+            pauseLayar();
+        }
+        else if (pilihanEdit == 4) {
             cin.ignore();
             cout << "Masukkan Jenis Kendaraan Baru (Mobil/Motor): ";
             getline(cin, jenisKendaraan[idx]);
             cout << GREEN << "[SISTEM] Jenis kendaraan berhasil diperbarui!\n" << RESET;
             pauseLayar();
         }
-        else if (pilihanEdit == 4) {
+        else if (pilihanEdit == 5) {
             cout << "Masukkan Besar Pajak Tahunan Baru (Rp): ";
             cin >> besarPajak[idx];
             cin.ignore(10000, '\n');
@@ -227,8 +269,9 @@ void lihatKendaraan() {
         cout << YELLOW << "Detail Informasi Kendaraan ke-" << i + 1 << ":" << RESET << endl;
         cout << "1. Nomor Plat        : " << platNomor[i] << endl;
         cout << "2. Nama Pemilik      : " << namaPemilik[i] << endl;
-        cout << "3. Jenis Kendaraan   : " << jenisKendaraan[i] << endl;
-        cout << "4. Pajak Tahunan     : Rp " << besarPajak[i] << endl;
+        cout << "3. Username Pemilik  : " << usernamePemilik[i] << endl;
+        cout << "4. Jenis Kendaraan   : " << jenisKendaraan[i] << endl;
+        cout << "5. Pajak Tahunan     : Rp " << besarPajak[i] << endl;
         cout << YELLOW << "----------------------------------------------------------------------------" << RESET << endl;
     }
     pauseLayar();
@@ -285,10 +328,13 @@ void hapusKendaraan() {
 
         if (konfirmasi == 'Y' || konfirmasi == 'y') {
             for (int i = indeksHapus; i < jumlahKendaraan - 1; i++) {
-                platNomor[i]      = platNomor[i + 1];
-                namaPemilik[i]    = namaPemilik[i + 1];
-                jenisKendaraan[i] = jenisKendaraan[i + 1];
-                besarPajak[i]     = besarPajak[i + 1];
+            platNomor[i]       = platNomor[i + 1];
+            namaPemilik[i]     = namaPemilik[i + 1];
+            usernamePemilik[i] = usernamePemilik[i + 1];
+            jenisKendaraan[i]  = jenisKendaraan[i + 1];
+            besarPajak[i]      = besarPajak[i + 1];
+            statusBayar[i]     = statusBayar[i + 1];
+            denda[i]           = denda[i + 1];
             }
 
             jumlahKendaraan--; 
@@ -499,9 +545,10 @@ void laporanPajakAdmin(){
 }
 
 void menuAdmin() {
+    int pilihan;
+    do{
     hapusLayar();
     bannerUtama();
-    int pilihan;
     cout << "[1] Manajemen Kendaraan\n";
     cout << "[2] Laporan Pajak\n";
     cout << "[0] Logout\n";
@@ -517,10 +564,243 @@ void menuAdmin() {
     else if ( pilihan == 0){
         return;
     }
+}while(pilihan != 0);
 }
 
-void menuPengguna()
+void lihatKendaraanSaya(string username)
 {
+    hapusLayar();
+    bannerUtama();
+
+    bool ditemukan = false;
+
+    cout << "===== KENDARAAN SAYA =====\n\n";
+
+    for(int i = 0; i < jumlahKendaraan; i++)
+    {
+        if(usernamePemilik[i] == username)
+        {
+            ditemukan = true;
+
+            cout << "Plat Nomor      : " << platNomor[i] << endl;
+            cout << "Nama Pemilik    : " << namaPemilik[i] << endl;
+            cout << "Jenis Kendaraan : " << jenisKendaraan[i] << endl;
+            cout << "Pajak Tahunan   : Rp " << besarPajak[i] << endl;
+
+            if(statusBayar[i])
+                cout << "Status Pajak    : LUNAS\n";
+            else
+                cout << "Status Pajak    : BELUM LUNAS\n";
+
+            cout << "-------------------------------------\n";
+        }
+    }
+
+    if(!ditemukan)
+    {
+        cout << "Belum ada kendaraan terdaftar.\n";
+    }
+
+    pauseLayar();
+}
+void bayarPajakPengguna(string username)
+{
+    hapusLayar();
+    bannerUtama();
+
+    bool ditemukan = false;
+
+    cout << "===== PEMBAYARAN PAJAK =====\n\n";
+
+    for(int i = 0; i < jumlahKendaraan; i++)
+    {
+        if(usernamePemilik[i] == username)
+        {
+            ditemukan = true;
+
+            cout << i + 1 << ". " << platNomor[i] << " | Rp " << besarPajak[i];
+
+            if(statusBayar[i])
+                cout << " | LUNAS";
+
+            cout << endl;
+        }
+    }
+
+    if(!ditemukan)
+    {
+        cout << "Tidak ada kendaraan.\n";
+        pauseLayar();
+        return;
+    }
+
+    int pilih;
+    cout << "\nPilih kendaraan : ";
+    cin >> pilih;
+
+    if(pilih < 1 || pilih > jumlahKendaraan)
+    {
+        cout << "Pilihan tidak valid!\n";
+        pauseLayar();
+        return;
+    }
+
+    pilih--;
+
+    int *tagihan = &besarPajak[pilih];
+
+    cout << "\nTotal Tagihan : Rp "
+         << *tagihan << endl;
+
+    char bayar;
+
+    cout << "Bayar sekarang? (Y/N) : ";
+    cin >> bayar;
+
+    if(bayar == 'Y' || bayar == 'y')
+    {
+        statusBayar[pilih] = true;
+
+        cout << "\nPembayaran berhasil!\n";
+    }
+
+    pauseLayar();
+}
+void hitungDendaPengguna(string username)
+{
+    hapusLayar();
+    bannerUtama();
+
+    cout << "===== HITUNG DENDA =====\n\n";
+
+    string plat;
+
+    cin.ignore();
+
+    cout << "Masukkan plat kendaraan : ";
+    getline(cin, plat);
+
+    bool ditemukan = false;
+
+    for(int i = 0; i < jumlahKendaraan; i++)
+    {
+        if(platNomor[i] == plat &&
+           usernamePemilik[i] == username)
+        {
+            ditemukan = true;
+
+            int bulan;
+
+            cout << "Jumlah bulan terlambat : ";
+            cin >> bulan;
+
+            int *pPajak = &besarPajak[i];
+
+            int hasilDenda =
+                (*pPajak * 2 * bulan) / 100;
+
+            cout << "\nPajak Pokok : Rp "
+                 << *pPajak << endl;
+
+            cout << "Denda : Rp "
+                 << hasilDenda << endl;
+
+            cout << "Total : Rp "
+                 << *pPajak + hasilDenda
+                 << endl;
+
+            break;
+        }
+    }
+
+    if(!ditemukan)
+    {
+        cout << "Kendaraan tidak ditemukan.\n";
+    }
+
+    pauseLayar();
+}
+void riwayatPembayaranPengguna(string username)
+{
+    hapusLayar();
+    bannerUtama();
+
+    bool ada = false;
+
+    cout << "===== RIWAYAT PEMBAYARAN =====\n\n";
+
+    for(int i = 0; i < jumlahKendaraan; i++)
+    {
+        if(usernamePemilik[i] == username &&
+           statusBayar[i])
+        {
+            ada = true;
+
+            cout << "Plat Nomor : " << platNomor[i] << endl;
+
+            cout << "Pajak : Rp " << besarPajak[i] << endl;
+
+            cout << "Status : LUNAS\n";
+
+            cout << "---------------------------\n";
+        }
+    }
+
+    if(!ada)
+    {
+        cout << "Belum ada riwayat pembayaran.\n";
+    }
+
+    pauseLayar();
+}
+void cariKendaraanSaya(string username)
+{
+    hapusLayar();
+    bannerUtama();
+
+    string plat;
+
+    cin.ignore();
+
+    cout << "Masukkan plat kendaraan : ";
+    getline(cin, plat);
+
+    bool ditemukan = false;
+
+    for(int i = 0; i < jumlahKendaraan; i++)
+    {
+        if(usernamePemilik[i] == username &&
+           platNomor[i].find(plat) != string::npos)
+        {
+            ditemukan = true;
+
+            cout << "\nPlat Nomor      : "
+                 << platNomor[i] << endl;
+
+            cout << "Nama Pemilik    : "
+                 << namaPemilik[i] << endl;
+
+            cout << "Jenis Kendaraan : "
+                 << jenisKendaraan[i] << endl;
+
+            cout << "Pajak Tahunan   : Rp "
+                 << besarPajak[i] << endl;
+        }
+    }
+
+    if(!ditemukan)
+    {
+        cout << "\nData tidak ditemukan.\n";
+    }
+
+    pauseLayar();
+}
+void menuPengguna(string username)
+{ 
+    int pilihan;
+    do{
+    hapusLayar();
+    bannerUtama();
     cout << "[1] Daftar Kendaraan Saya\n";
     cout << "[2] Pembayaran Pajak \n";
     cout << "[3] Perhitungan Denda \n";
@@ -528,18 +808,50 @@ void menuPengguna()
     cout << "[5] Cari Data Kendaraan \n";
     cout << "[0] Logout\n";
     cout << "Masukkan pilihan : ";
-    int pil;
-    cin >> pil;
-}
+    cin >> pilihan;
+    if (cin.fail()) {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << RED << "[ERROR] Input harus berupa angka!\n" << RESET;
+            pauseLayar();
+            cin.get();
+            continue;
+        }
+    if(pilihan == 1)
+        {
+            lihatKendaraanSaya(username);
+        }
+        else if(pilihan == 2)
+        {
+            bayarPajakPengguna(username);
+        }
+        else if(pilihan == 3)
+        {
+            hitungDendaPengguna(username);
+        }
+        else if(pilihan == 4)
+        {
+            riwayatPembayaranPengguna(username);
+        }
+        else if(pilihan == 5)
+        {
+            cariKendaraanSaya(username);
+        }
+        else if(pilihan == 0)
+        {
+            return;
+        }
+        else
+        {
+            cout << RED
+                 << "[ERROR] Pilihan tidak valid!\n"
+                 << RESET;
 
-const int maksPengguna = 100;
-struct Pengguna {
-    string username;
-    string password;
-    string admin;
-};
-Pengguna dataPengguna[maksPengguna];
-int totalPengguna = 1;
+            pauseLayar();
+        }
+
+    }while(pilihan != 0);
+}
 
 void daftarAkun() {
     hapusLayar();
@@ -553,11 +865,11 @@ void daftarAkun() {
 	cout << CYAN   << "                         [ REGISTRASI AKUN PAJAKKU]                         " << endl;
 	cout << WHITE  << "----------------------------------------------------------------------------" << endl;
 	cout << GREEN  << "============================================================================" << RESET << endl;
-    string user, password, konfirmasiPassword;
+    string user, password, konfirmasiPassword, namaLengkap;
     bool isUserValid = false;
     do {
         cout << "Masukkan Username     : "; getline(cin, user);
-        
+        cout << "Masukkan Nama Lengkap : "; getline(cin, namaLengkap);
         bool isSudahAda = false;
         for (int i = 0; i < totalPengguna; i++) {
             if (dataPengguna[i].username == user) {
@@ -591,6 +903,7 @@ void daftarAkun() {
     } while (isPasswordValid == false);
     
     dataPengguna[totalPengguna].username = user;
+    dataPengguna[totalPengguna].namaLengkap = namaLengkap;
     dataPengguna[totalPengguna].password = password;
     dataPengguna[totalPengguna].admin = "pengguna";
     totalPengguna++;
@@ -601,7 +914,8 @@ void daftarAkun() {
 void cariDataPengguna() {
     int pilihan;
     do {
-        system("cls");
+        hapusLayar();
+        bannerUtama();
         cout << "========================================\n";
         cout << "            MENU PENCARIAN DATA         \n";
         cout << "========================================\n";
@@ -720,7 +1034,7 @@ void login() {
             if (dataPengguna[i].admin == "admin") {
                 menuAdmin();
             } else {
-                menuPengguna();
+                menuPengguna(dataPengguna[i].username);
             }
         }
     }
@@ -786,6 +1100,7 @@ void menuAwal() {
 }
 
 int main() {
+    dataPengguna[0].namaLengkap = "Administrator";
     dataPengguna[0].username = "admin";
     dataPengguna[0].password = "12345678";
     dataPengguna[0].admin = "admin";
