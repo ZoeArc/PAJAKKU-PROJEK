@@ -1,1 +1,6 @@
+# settingan VSCode
+.vscode
+
+# file exe
 *.exe
+main.exe
