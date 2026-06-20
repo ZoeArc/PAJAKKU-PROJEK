@@ -45,6 +45,8 @@ string namaPemilik[maxKendaraan];
 string jenisKendaraan[maxKendaraan];
 int besarPajak[maxKendaraan];
 int jumlahKendaraan = 0;
+bool statusBayar[maxKendaraan] = {false};
+int denda[maxKendaraan] = {0};
 
 void tambahKendaraan() {
 	hapusLayar();
@@ -343,20 +345,157 @@ void manajemenKendaraanAdmin(){
 }
 
 void laporanPajakAdmin(){
-    bannerUtama();
-    cout<<"[1] Pembayaraan Pajak\n";
-    cout<<"[2] Hitung Denda Keterlambatan\n";
-    cout<<"[3] Riwayat Pembayaran\n";
-    cout<<"[0] Kembali\n";
-    cout << "Masukkan pilihan : ";
-}
+    int pilihan;
+    do{
+        hapusLayar();
+        bannerUtama();
+        cout << "===== LAPORAN PAJAK ADMIN =====\n";
+        cout << "[1] Pembayaran Pajak\n";
+        cout << "[2] Hitung Denda Keterlambatan\n";
+        cout << "[3] Riwayat Pembayaran\n";
+        cout << "[0] Kembali\n";
+        cout << "Masukkan pilihan : ";
+        cin >> pilihan;
 
-void cariDataAdmin(){
-    bannerUtama();
-    cout << "[1] Cari Berdasarkan Plat\n";
-    cout << "[2] Cari Berdasarkan Pemilik\n";
-    cout << "[0] Kembaki\n";
-    cout << "Masukkan pilihan : ";
+        if (cin.fail()){
+            cin.clear();
+            cin.ignore(10000, '\n');
+            pilihan = -1;
+        }
+        switch (pilihan){
+        case 1:{
+            hapusLayar();
+            bannerUtama();
+            if (jumlahKendaraan == 0){
+                cout << "Belum ada data kendaraan!\n";
+                cin.ignore(10000, '\n');
+                cin.get();
+                break;
+            }
+            cout << "===== PEMBAYARAN PAJAK =====\n";
+            for (int i = 0; i < jumlahKendaraan; i++){
+                cout << i + 1 << ". " << platNomor[i] << " | " << namaPemilik[i];
+                if (statusBayar[i])
+                    cout << " (LUNAS)"<< endl;
+            }
+            int pilih;
+            cout << "\nPilih kendaraan : ";
+            cin >> pilih;
+            if (pilih < 1 || pilih > jumlahKendaraan){
+                cout << "Pilihan kendaraan tidak valid!\n";
+                cin.ignore(10000, '\n');
+                cin.get();
+                break;
+            }
+            int idx = pilih - 1;
+            if (statusBayar[idx]){
+                cout << "\nPajak kendaraan ini sudah lunas!\n";
+                cin.ignore(10000, '\n');
+                cin.get();
+                break;
+            }
+            int totalTagihan = besarPajak[idx] + denda[idx];
+            cout << "\nPlat Nomor   : " << platNomor[idx] << endl;
+            cout << "Pemilik      : " << namaPemilik[idx] << endl;
+            cout << "Pajak Pokok  : Rp " << besarPajak[idx] << endl;
+            cout << "Denda        : Rp " << denda[idx] << endl;
+            cout << "Total Bayar  : Rp " << totalTagihan << endl;
+
+            int uangDibayar;
+            cout << "\nMasukkan uang pembayaran : Rp ";
+            cin >> uangDibayar;
+
+            if (uangDibayar < totalTagihan){
+                cout << "\nPembayaran gagal!\n";
+                cout << "Uang kurang Rp " << totalTagihan - uangDibayar << endl;
+            }
+            else{
+                int kembalian = uangDibayar - totalTagihan;
+                statusBayar[idx] = true;
+                cout << "\nPembayaran berhasil!\n";
+                cout << "Uang Dibayar : Rp " << uangDibayar << endl;
+                cout << "Kembalian    : Rp " << kembalian << endl;
+                cout << "Status Pajak : LUNAS\n";
+            }
+            cin.ignore(10000, '\n');
+            cout << "\nTekan ENTER untuk kembali...";
+            cin.get();
+            break;
+        }
+        case 2:{
+            hapusLayar();
+            bannerUtama();
+            if (jumlahKendaraan == 0){
+                cout << "Belum ada data kendaraan!\n";
+                cin.ignore(10000, '\n');
+                cin.get();
+                break;
+            }
+            cout << "===== HITUNG DENDA =====\n";
+            for (int i = 0; i < jumlahKendaraan; i++){
+                cout << i + 1 << ". "<< platNomor[i]<< " | "<< namaPemilik[i]<< endl;
+            }
+
+            int pilih;
+            cout << "\nPilih kendaraan : ";
+            cin >> pilih;
+
+            if (pilih < 1 || pilih > jumlahKendaraan){
+                cout << "Pilihan tidak valid!\n";
+            }
+            else{
+                int bulan;
+                cout << "Masukkan jumlah bulan keterlambatan : ";
+                cin >> bulan;
+                int idx = pilih - 1;
+                denda[idx] = besarPajak[idx] * 2 * bulan / 100;
+                cout << "\nPajak Pokok : Rp "<< besarPajak[idx] << endl;
+                cout << "Denda       : Rp "<< denda[idx] << endl;
+                cout << "Total Tagihan : Rp "<< besarPajak[idx] + denda[idx]<< endl;
+            }
+            cin.ignore(10000, '\n');
+            cout << "\nTekan ENTER untuk kembali...";
+            cin.get();
+            break;
+        }
+
+        case 3:{
+            hapusLayar();
+            bannerUtama();
+            cout << "===== RIWAYAT PEMBAYARAN =====\n\n";
+            bool ada = false;
+            for (int i = 0; i < jumlahKendaraan; i++){
+                if (statusBayar[i]){
+                    ada = true;
+                    cout << "====================================\n";
+                    cout << "Plat Nomor      : " << platNomor[i] << endl;
+                    cout << "Nama Pemilik    : "<< namaPemilik[i] << endl;
+                    cout << "Jenis Kendaraan : " << jenisKendaraan[i] << endl;
+                    cout << "Pajak Pokok     : Rp " << besarPajak[i] << endl;
+                    cout << "Denda           : Rp "<< denda[i] << endl;
+                    cout << "Total Bayar     : Rp "<< besarPajak[i] + denda[i]<< endl;
+                    cout << "Status          : LUNAS\n";
+                    cout << "====================================\n";
+                }
+            }
+
+            if (!ada){
+                cout << "Belum ada riwayat pembayaran.\n";
+            }
+            cin.ignore(10000, '\n');
+            cout << "\nTekan ENTER untuk kembali...";
+            cin.get();
+            break;
+        }
+        case 0:
+            break;
+        default:
+            cout << "Pilihan tidak valid!\n";
+            cin.ignore(10000, '\n');
+            cin.get();
+        }
+
+    } while (pilihan != 0);
 }
 
 void menuAdmin() {
