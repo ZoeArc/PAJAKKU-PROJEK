@@ -1,5 +1,6 @@
 #include <iostream>
 #include <conio.h>
+#include <windows.h>
 using namespace std;
 
 const string RED    = "\033[31m";
@@ -108,7 +109,6 @@ void tambahKendaraan() {
     {
         break;
     }
-
     cout << RED
          << "[ERROR] Username tidak terdaftar!\n"
          << RESET;
@@ -283,11 +283,6 @@ void lihatKendaraan() {
         pauseLayar();
         return;     
     }
-	cout << GREEN  << "============================================================================" << endl;
-	cout << WHITE  << "----------------------------------------------------------------------------" << endl;
-	cout << CYAN   << "                        [ DAFTAR KENDARAAN TERDAFTAR ]                      " << endl;
-	cout << WHITE  << "----------------------------------------------------------------------------" << endl;
-	cout << GREEN  << "============================================================================" << RESET << endl;
 
     for (int i = 0; i < jumlahKendaraan; i++) {
         cout << YELLOW << "Detail Informasi Kendaraan ke-" << i + 1 << ":" << RESET << endl;
@@ -1024,6 +1019,7 @@ void bayarPajakPengguna(string username)
     {
         cout << RED << "[ERROR] Pilihan tidak valid!\n" << RESET;
         pauseLayar();
+        cin.ignore();
         return;
     }
 
