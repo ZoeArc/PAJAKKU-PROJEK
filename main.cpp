@@ -104,23 +104,33 @@ void tambahKendaraan() {
     while (true) {
         align(); cout << "Masukkan Nama Pemilik                    : ";
         getline(cin, namaPemilik[jumlahKendaraan]);
-        if (!namaPemilik[jumlahKendaraan].empty()) {
-            break;
+        if (namaPemilik[jumlahKendaraan].empty()) {
+            align(); cout << RED << "[ERROR] Nama pemilik tidak boleh kosong!\n" << RESET;
+            continue;
         }
-        align(); cout << RED << "[ERROR] Nama pemilik tidak boleh kosong!\n" << RESET;
+        bool valid = true;
+        for (int i = 0; i < namaPemilik[jumlahKendaraan].length(); i++) {
+            char c = namaPemilik[jumlahKendaraan][i];
+            if (!((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == ' ')) {
+                valid = false;
+                break;
+            }
+        }
+        if (!valid) {
+            align(); cout << RED << "[ERROR] Nama hanya boleh berisi huruf dan spasi!\n" << RESET;
+            continue;
+        }
+        break;
     }
 
-    while(true)
-{
+
+    while(true){
     align(); cout << "Masukkan Username Pemilik                : ";
     getline(cin, usernamePemilik[jumlahKendaraan]);
-
     bool ditemukan = false;
-
     for(int i = 0; i < totalPengguna; i++)
     {
-        if(dataPengguna[i].username ==
-           usernamePemilik[jumlahKendaraan])
+        if(dataPengguna[i].username == usernamePemilik[jumlahKendaraan])
         {
             ditemukan = true;
             break;
@@ -131,9 +141,7 @@ void tambahKendaraan() {
     {
         break;
     }
-    align();cout << RED
-             << "[ERROR] Username tidak terdaftar!\n"
-             << RESET;
+    align();cout << RED << "[ERROR] Username tidak terdaftar!\n" << RESET;
 }
     while (true) {
         align(); cout << "Masukkan Jenis Kendaraan (Mobil/Motor)   : ";
