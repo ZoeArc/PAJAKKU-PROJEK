@@ -3,24 +3,42 @@
 using namespace std;
 
 const string RED    = "\033[31m";
+const string BLACK   = "\033[30m";
 const string GREEN  = "\033[32m";
 const string YELLOW = "\033[33m";
 const string BLUE   = "\033[34m";
 const string CYAN   = "\033[36m";
 const string WHITE  = "\033[37m";
+const string PURPLE = "\033[95m";
+const string ITALIC    = "\033[3m";
+const string DIM       = "\033[2m";
+const string BOLD      = "\033[1m";
 const string RESET  = "\033[0m";
 
-
 void align(){
-    cout << "                                       ";
+    cout << "                                        ";
 }
 void hapusLayar() {
-    system("cls");
-    align(); cout << "\033[2J\033[1;1H";
+    cout << "\033[2J\033[3J\033[H";
 }
 void pauseLayar() {
     align(); cout  << "Tekan ENTER untuk melanjutkan...";
     cin.ignore(10000, '\n');
+}
+
+void kreator() {
+	align(); cout << GREEN  << "============================================================================" << endl;
+	align(); cout << PURPLE  << "---------------------------------------------------------------------------" << endl;
+	align(); cout << CYAN   << "                             [ KREATOR PROGRAM ]                            " << endl;
+	align(); cout << PURPLE  << "---------------------------------------------------------------------------" << endl;
+	align(); cout << GREEN  << "============================================================================" << RESET << endl;
+    align(); cout << BOLD << DIM << "                  [1] Heni Patun Pidani        (F1D02510009)" << endl;
+    align(); cout << "                  [2] Tiha Karyati             (F1D02510028)" << endl; 
+    align(); cout << "                  [3] Muhamad Alfian Maulana   (F1D02510077)" << endl; 
+    align(); cout << "                  [4] Asmaul Husnah            (F1D02510106)" << endl; 
+    align(); cout << "                  [5] Edgar Dave Aipassa       (F1D02510111)" << endl;
+    align(); cout << "                  [6] Lalu Helmi Firdaus       (F1D02510119)" << endl;
+    align(); cout << "                  [7] Wildan Afandika          (F1D02510141)" << endl << RESET;
 }
 
 void bannerUtama() {
@@ -28,18 +46,18 @@ void bannerUtama() {
     align(); cout << CYAN   << "XXXXXXX    XXXXXX       XXXXX   XXXXXX   XXXX  XXXX  XXXX  XXXX  XXXX  XXXX\n";
     align(); cout << CYAN   << "XXXXXXXX  XXXXXXXX      XXXXX  XXXXXXXX  XXXX  XXXX  XXXX  XXXX  XXXX  XXXX\n";  
     align(); cout << CYAN   << "XXX  XXX  XXX  XXX      XXXXX  XXX  XXX  XXX  XXXX   XXX  XXXX   XXXX  XXXX \n";  
-    align(); cout << WHITE  << "XXX  XXXX XXX  XXXX     XXXXX  XXX  XXXX XXX  XXXX   XXX  XXXX   XXXX  XXXX \n"; 
-    align(); cout << WHITE  << "XXXXXXXX  XXXXXXXX      XXXXX  XXXXXXXX  XXXXXXXX    XXXXXXXX    XXXX  XXXX \n";  
-    align(); cout << WHITE  << "XXXXXXX   XXXXXXXX      XXXXX  XXXXXXXX  XXXXXXXX    XXXXXXXX    XXXX  XXXX \n"; 
+    align(); cout << PURPLE  << "XXX  XXXX XXX XXXX      XXXXX  XXX  XXXX XXX  XXXX   XXX  XXXX   XXXX  XXXX \n"; 
+    align(); cout << PURPLE  << "XXXXXXXX  XXXXXXXX      XXXXX  XXXXXXXX  XXXXXXXX    XXXXXXXX    XXXX  XXXX \n";  
+    align(); cout << PURPLE  << "XXXXXXX   XXXXXXXX      XXXXX  XXXXXXXX  XXXXXXXX    XXXXXXXX    XXXX  XXXX \n"; 
     align(); cout << CYAN   << "XXX       XXX  XXX  XX  XXXXX  XXX  XXX  XXX  XXXX   XXX  XXXX   XXXX  XXXX \n";  
     align(); cout << CYAN   << "XXX       XXX  XXX  XXXXXXXXX  XXX  XXX  XXX  XXXX   XXX  XXXX   XXXXXXXXXX \n";  
     align(); cout << CYAN   << "XXX       XXX  XXX   XXXXXXX   XXX  XXX  XXXX  XXXX  XXXX  XXXX   XXXXXXXX  \n";  
-    align(); cout << WHITE  << "___________________________________________________________________________\n";
-    align(); cout << WHITE  << "|__________________________________________________________________________|\n";
-    align(); cout << WHITE  << "|                                                                          |\n";
-    align(); cout << WHITE  << "|" << YELLOW << "                      SISTEM PEMBAYARAN PAJAK KENDARAAN                   " << WHITE << "|\n";
-    align(); cout << WHITE  << "|__________________________________________________________________________|\n";
-    align(); cout << WHITE  << "|__________________________________________________________________________|\n";
+    align(); cout << PURPLE  << "___________________________________________________________________________\n";
+    align(); cout << PURPLE  << "|__________________________________________________________________________|\n";
+    align(); cout << PURPLE  << "|                                                                          |\n";
+    align(); cout << PURPLE  << "|" << ITALIC << YELLOW << "                      SISTEM PEMBAYARAN PAJAK KENDARAAN                   " << RESET; cout << PURPLE << "|\n";
+    align(); cout << PURPLE  << "|__________________________________________________________________________|\n";
+    align(); cout << PURPLE  << "|__________________________________________________________________________|\n";
     cout << RESET << endl;
 }
 
@@ -69,9 +87,9 @@ void tambahKendaraan() {
         return;
     }
 	align(); cout << GREEN  << "============================================================================" << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << CYAN   << "                          [ TAMBAH DATA KENDARAAN ]                         " << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << GREEN  << "============================================================================" << RESET << endl;
     
     while (true) {
@@ -91,6 +109,7 @@ void tambahKendaraan() {
         }
         align(); cout << RED << "[ERROR] Nama pemilik tidak boleh kosong!\n" << RESET;
     }
+
     while(true)
 {
     align(); cout << "Masukkan Username Pemilik                : ";
@@ -154,9 +173,9 @@ void editDataKendaraan() {
     hapusLayar();
     bannerUtama();
     align(); cout << GREEN  << "============================================================================" << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << CYAN   << "                     [ PILIH DATA YANG INGIN DI EDIT ]                      " << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << GREEN  << "============================================================================" << RESET << endl;
     if (jumlahKendaraan == 0) {
         align(); cout << YELLOW << "[PERINGATAN] Belum ada data kendaraan yang terdaftar!\n" << RESET;
@@ -166,9 +185,9 @@ void editDataKendaraan() {
     hapusLayar();
     bannerUtama();
 	align(); cout << GREEN  << "============================================================================" << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << CYAN   << "                     [ PILIH DATA YANG INGIN DI EDIT ]                      " << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << GREEN  << "============================================================================" << RESET << endl;
     
     for (int i = 0; i < jumlahKendaraan; i++) {
@@ -197,42 +216,42 @@ void editDataKendaraan() {
         hapusLayar();
         bannerUtama();
         align(); cout << GREEN  << "============================================================================" << endl;
-        align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+        align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
         align(); cout << CYAN   << "                            [ EDIT DATA KENDARAAN ]                         " << endl;
-        align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+        align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
         align(); cout << GREEN  << "============================================================================" << RESET << endl;
 
         align(); cout << "Data Saat Ini:\n";
         
         if (pilihanEdit == 0) {
-            align(); cout << GREEN << " [1] Plat Nomor         : " << platNomor[idx] << " <\n" << RESET;
+            align(); cout << GREEN << "[1] Plat Nomor         : " << platNomor[idx] << " <\n" << RESET;
         } else {
-            align(); cout << " [1] Plat Nomor         : " << platNomor[idx] << "\n";
+            align(); cout << "[1] Plat Nomor         : " << platNomor[idx] << "\n";
         }
         if (pilihanEdit == 1) {
-            align(); cout << GREEN << " [2] Nama Pemilik       : " << namaPemilik[idx] << " <\n" << RESET;
+            align(); cout << GREEN << "[2] Nama Pemilik       : " << namaPemilik[idx] << " <\n" << RESET;
         } else {
-            align(); cout << " [2] Nama Pemilik       : " << namaPemilik[idx] << "\n";
+            align(); cout << "[2] Nama Pemilik       : " << namaPemilik[idx] << "\n";
         }
         if (pilihanEdit == 2) {
-            align(); cout << GREEN << " [3] Username Pemilik   : " << usernamePemilik[idx] << " <\n" << RESET;
+            align(); cout << GREEN << "[3] Username Pemilik   : " << usernamePemilik[idx] << " <\n" << RESET;
         } else {
-            align(); cout << " [3] Username Pemilik   : " << usernamePemilik[idx] << "\n";
+            align(); cout << "[3] Username Pemilik   : " << usernamePemilik[idx] << "\n";
         }
         if (pilihanEdit == 3) {
-            align(); cout << GREEN << " [4] Jenis Kendaraan    : " << jenisKendaraan[idx] << " <\n" << RESET;
+            align(); cout << GREEN << "[4] Jenis Kendaraan    : " << jenisKendaraan[idx] << " <\n" << RESET;
         } else {
-            align(); cout << " [4] Jenis Kendaraan    : " << jenisKendaraan[idx] << "\n";
+            align(); cout << "[4] Jenis Kendaraan    : " << jenisKendaraan[idx] << "\n";
         }
         if (pilihanEdit == 4) {
-            align(); cout << GREEN << " [5] Pajak Tahunan      : Rp " << besarPajak[idx] << " <\n" << RESET;
+            align(); cout << GREEN << "[5] Pajak Tahunan      : Rp " << besarPajak[idx] << " <\n" << RESET;
         } else {
-            align(); cout << " [5] Pajak Tahunan      : Rp " << besarPajak[idx] << "\n";
+            align(); cout << "[5] Pajak Tahunan      : Rp " << besarPajak[idx] << "\n";
         }
         if (pilihanEdit == 5) {
-            align(); cout << GREEN << " [0] Selesai Mengedit <\n" << RESET;
+            align(); cout << GREEN << "[0] Selesai Mengedit <\n" << RESET;
         } else {
-            align(); cout << " [0] Selesai Mengedit\n";
+            align(); cout << "[0] Selesai Mengedit\n";
         }
         align(); cout << "----------------------------------------------------------------------------" << endl;
 
@@ -336,9 +355,9 @@ void lihatKendaraan() {
     hapusLayar();
     bannerUtama();
 	align(); cout << GREEN  << "============================================================================" << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << CYAN   << "                        [ DAFTAR KENDARAAN TERDAFTAR ]                      " << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << GREEN  << "============================================================================" << RESET << endl;
     if (jumlahKendaraan == 0) {
         align(); cout << YELLOW << "[PERINGATAN] Belum ada data kendaraan yang terdaftar!\n" << RESET;
@@ -362,9 +381,9 @@ void hapusKendaraan() {
     hapusLayar();
     bannerUtama();
     align(); cout << GREEN  << "============================================================================" << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << CYAN   << "                           [ HAPUS DATA KENDARAAN ]                         " << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << GREEN  << "============================================================================" << RESET << endl;
     if (jumlahKendaraan == 0) {
         align(); cout << YELLOW << "[PERINGATAN] Belum ada data kendaraan yang terdaftar!\n" << RESET;
@@ -528,9 +547,9 @@ void laporanPajakAdmin(){
         hapusLayar();
         bannerUtama();
         align(); cout << GREEN  << "============================================================================" << endl;
-        align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+        align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
         align(); cout << CYAN   << "                           [ LAPORAN PAJAK ADMIN ]                          " << endl;
-        align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+        align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
         align(); cout << GREEN  << "============================================================================" << RESET << endl;
         
         if (pilihan == 0) {
@@ -588,9 +607,9 @@ void laporanPajakAdmin(){
                 hapusLayar();
                 bannerUtama();
                 align(); cout << GREEN  << "============================================================================" << endl;
-                align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+                align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
                 align(); cout << CYAN   << "                             [ PEMBAYARAN PAJAK ]                           " << endl;
-                align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+                align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
                 align(); cout << GREEN  << "============================================================================" << RESET << endl;
                 if (jumlahKendaraan == 0){
                     align(); cout << YELLOW << "[PERINGATAN] Belum ada data kendaraan!\n" << RESET;
@@ -602,8 +621,10 @@ void laporanPajakAdmin(){
                     align(); cout << i + 1 << ". " << platNomor[i] << " | " << namaPemilik[i];
                     if (statusBayar[i]){
                         align(); cout << " ("<<GREEN<<"LUNAS"<<RESET<<")"<< endl;
-                    }else 
+                    }
+                    else {
                         align(); cout << endl;
+                    }
                 }
                 int pilih;
                 align(); cout << "Pilih kendaraan : ";
@@ -659,9 +680,9 @@ void laporanPajakAdmin(){
                 hapusLayar();
                 bannerUtama();
                 align(); cout << GREEN  << "============================================================================" << endl;
-                align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+                align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
                 align(); cout << CYAN   << "                      [ HITUNG DENDA KETERLAMBATAN ]                        " << endl;
-                align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+                align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
                 align(); cout << GREEN  << "============================================================================" << RESET << endl;
                 if (jumlahKendaraan == 0){
                     align(); cout << YELLOW << "[PERINGATAN] Belum ada data kendaraan!\n" << RESET;
@@ -704,9 +725,9 @@ void laporanPajakAdmin(){
                 hapusLayar();
                 bannerUtama();
                 align(); cout << GREEN  << "============================================================================" << endl;
-                align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+                align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
                 align(); cout << CYAN   << "                            [ RIWAYAT PEMBAYARAN ]                          " << endl;
-                align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+                align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
                 align(); cout << GREEN  << "============================================================================" << RESET << endl;
                 bool ada = false;
                 for (int i = 0; i < jumlahKendaraan; i++){
@@ -743,9 +764,9 @@ void cariDataPengguna() {
         hapusLayar();
         bannerUtama();
         align(); cout << GREEN  << "============================================================================" << endl;
-        align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+        align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
         align(); cout << CYAN   << "                            [ CARI DATA PENGGUNA ]                          " << endl;
-        align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+        align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
         align(); cout << GREEN  << "============================================================================" << RESET << endl;
         
         if (pilihan == 0) {
@@ -793,9 +814,9 @@ void cariDataPengguna() {
                 hapusLayar();
                 bannerUtama();
                 align(); cout << GREEN  << "============================================================================" << endl;
-                align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+                align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
                 align(); cout << CYAN   << "                      [ CARI BERDASARKAN PLAT NOMOR ]                       " << endl;
-                align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+                align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
                 align(); cout << GREEN  << "============================================================================" << RESET << endl;    
                 if (jumlahKendaraan == 0) {
                     align(); cout << YELLOW << "[PERINGATAN] Belum ada data kendaraan yang terdaftar!\n" << RESET;
@@ -806,9 +827,9 @@ void cariDataPengguna() {
                 hapusLayar();
                 bannerUtama();
                 align(); cout << GREEN  << "============================================================================" << endl;
-                align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+                align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
                 align(); cout << CYAN   << "                      [ CARI BERDASARKAN PLAT NOMOR ]                       " << endl;
-                align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+                align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
                 align(); cout << GREEN  << "============================================================================" << RESET << endl;
                 string cariPlat;
                 align(); cout << "Masukkan Plat Nomor yang dicari: ";
@@ -836,9 +857,9 @@ void cariDataPengguna() {
                 hapusLayar();
                 bannerUtama();
                 align(); cout << GREEN  << "============================================================================" << endl;
-                align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+                align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
                 align(); cout << CYAN   << "                     [ CARI BERDASARKAN NAMA PEMILIK ]                      " << endl;
-                align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+                align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
                 align(); cout << GREEN  << "============================================================================" << RESET << endl;
                 if (jumlahKendaraan == 0) {
                     align(); cout << YELLOW << "[PERINGATAN] Belum ada data kendaraan yang terdaftar!\n" << RESET;
@@ -849,9 +870,9 @@ void cariDataPengguna() {
                 hapusLayar();
                 bannerUtama();
                 align(); cout << GREEN  << "============================================================================" << endl;
-                align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+                align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
                 align(); cout << CYAN   << "                     [ CARI BERDASARKAN NAMA PEMILIK ]                      " << endl;
-                align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+                align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
                 align(); cout << GREEN  << "============================================================================" << RESET << endl;
                 string cariNama;
                 align(); cout << "Masukkan Nama Pemilik yang dicari: ";
@@ -965,9 +986,9 @@ void lihatKendaraanSaya(string username)
     bool ditemukan = false;
 
     align(); cout << GREEN  << "============================================================================" << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << CYAN   << "                          [ DAFTAR KENDARAAN SAYA ]                         " << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << GREEN  << "============================================================================" << RESET << endl;
 
     for(int i = 0; i < jumlahKendaraan; i++)
@@ -983,8 +1004,10 @@ void lihatKendaraanSaya(string username)
 
             if(statusBayar[i]){
                 align(); cout << "Status Pajak    : " << GREEN << "LUNAS\n" << RESET;
-            }else
+            }
+            else {
                 align(); cout << "Status Pajak    : " << RED << "BELUM LUNAS\n" << RESET;
+            }
 
             align(); cout << "----------------------------------------------------------------------------" << endl;
         }
@@ -1006,9 +1029,9 @@ void bayarPajakPengguna(string username)
     int daftarIndex[100];
     int jumlahData=0;
 	align(); cout << GREEN  << "============================================================================" << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << CYAN   << "                            [ PEMBAYARAN PAJAK ]                            " << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << GREEN  << "============================================================================" << RESET << endl;
 
     for(int i = 0; i < jumlahKendaraan; i++)
@@ -1084,9 +1107,9 @@ void hitungDendaPengguna(string username)
     bannerUtama();
 
 	align(); cout << GREEN  << "============================================================================" << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << CYAN   << "                           [ PERHITUNGAN DENDA ]                            " << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << GREEN  << "============================================================================" << RESET << endl;
     string plat;
     align(); cout << "Masukkan plat kendaraan : ";
@@ -1107,15 +1130,18 @@ void hitungDendaPengguna(string username)
                 cin.ignore(10000, '\n');
                 align(); cout << RED << "[ERROR] Jumlah bulan tidak valid!\n" << RESET;
                 pauseLayar();
+
                 return;
             }
+            cin.ignore(100000, '\n');
             int *pPajak = &besarPajak[i];
             int hasilDenda =
                 (*pPajak * 2 * bulan) / 100;
             align(); cout << "Pajak Pokok : Rp " << *pPajak << endl;
             align(); cout << "Denda : Rp " << hasilDenda << endl;
             align(); cout << "Total : Rp " << *pPajak + hasilDenda << endl;
-            break;
+            pauseLayar();
+            return;
         }
     }
 
@@ -1134,9 +1160,9 @@ void riwayatPembayaranPengguna(string username)
     bool ada = false;
 
 	align(); cout << GREEN  << "============================================================================" << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << CYAN   << "                           [ RIWAYAT PEMBAYARAN ]                           " << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << GREEN  << "============================================================================" << RESET << endl;
 
     for(int i = 0; i < jumlahKendaraan; i++)
@@ -1256,9 +1282,9 @@ void daftarAkun() {
         return;
     }
 	align(); cout << GREEN  << "============================================================================" << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << CYAN   << "                         [ REGISTRASI AKUN PAJAKKU]                         " << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << GREEN  << "============================================================================" << RESET << endl;
     string user, password, konfirmasiPassword, namaLengkap;
     bool isUserValid = false;
@@ -1268,13 +1294,13 @@ void daftarAkun() {
         
         if (user.empty())
         {
-            align(); cout << RED << "[ERROR] Username tidak boleh kosong!\n" << RESET;
-            continue;
+            align(); cout << RED << "[ERROR] Username atau nama lengkap tidak boleh kosong!\n" << RESET;
+            return;
         }
         if (namaLengkap.empty())
         {
-            align(); cout << RED << "[ERROR] Nama lengkap tidak boleh kosong!\n" << RESET;
-            continue;
+            align(); cout << RED << "[ERROR] Username atau nama lengkap tidak boleh kosong!\n" << RESET;
+            return;
         }
         bool isSudahAda = false;
         for (int i = 0; i < totalPengguna; i++) {
@@ -1318,9 +1344,9 @@ void login() {
     hapusLayar();
     bannerUtama();
 	align(); cout << GREEN  << "============================================================================" << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << CYAN   << "                              [ LOGIN KE PAJAKKU ]                          " << endl;
-	align(); cout << WHITE  << "----------------------------------------------------------------------------" << endl;
+	align(); cout << PURPLE  << "----------------------------------------------------------------------------" << endl;
 	align(); cout << GREEN  << "============================================================================" << RESET << endl;
     string user, password;
     align(); cout << "Username : "; getline(cin, user);
@@ -1401,6 +1427,10 @@ void menuAwal() {
                 pauseLayar();
             } else if (pilihMenu == 2) {
                 align(); cout << "Keluar dari program..." << endl;
+                hapusLayar();
+                kreator();
+                cin.ignore(1000, '\n');
+                hapusLayar();
                 isKeluar = true;
             }
         }
@@ -1413,5 +1443,7 @@ int main() {
     dataPengguna[0].password = "12345678";
     dataPengguna[0].admin = "admin";
     menuAwal();
+
+
     return 0;
 } 
