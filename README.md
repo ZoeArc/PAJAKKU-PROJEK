@@ -29,20 +29,17 @@
 ### 🛠️ Admin
 | Fitur | Keterangan |
 |---|---|
-| Dashboard | Statistik total kendaraan, pemilik, transaksi, dan pendapatan pajak |
-| Manajemen Kendaraan | Tambah, edit, hapus, dan lihat data kendaraan |
-| Manajemen Pembayaran | Validasi, lihat, dan riwayat pembayaran |
-| Laporan Pajak | Laporan kendaraan aktif, pajak dibayar, dan kendaraan menunggak |
+| Manajemen Kendaraan | Tambah, edit, lihat, dan hapus data kendaraan |
+| Laporan Pajak | Pembayaran pajak, hitung denda keterlambatan, dan riwayat pembayaran |
+| Cari Data Pengguna | Cari kendaraan berdasarkan plat nomor atau nama pemilik |
 
 ### 👤 Pengguna
 | Fitur | Keterangan |
 |---|---|
-| Beranda | Lihat, cari, dan urutkan daftar kendaraan |
-| Data Kendaraan | Kelola data kendaraan milik pengguna |
-| Pembayaran Pajak | Hitung total, denda, dan konfirmasi bayar |
+| Daftar Kendaraan Saya | Lihat data kendaraan milik pengguna |
+| Pembayaran Pajak | Hitung total tagihan, denda, dan konfirmasi pembayaran |
 | Perhitungan Denda | Hitung denda berdasarkan lama keterlambatan |
-| Riwayat Pembayaran | Lihat riwayat transaksi dan detail pembayaran |
-| Pencarian Data | Cari kendaraan berdasarkan nomor plat atau nama pemilik |
+| Riwayat Pembayaran | Lihat riwayat transaksi pembayaran pajak |
 
 ---
 
@@ -55,19 +52,27 @@ LOGIN
 └── EXIT           → Keluar program
 
 ADMIN
-├── Dashboard Admin
 ├── Manajemen Kendaraan
-├── Manajemen Pembayaran
+│   ├── Tambah Kendaraan
+│   ├── Edit Data Kendaraan
+│   ├── Lihat Kendaraan
+│   ├── Hapus Kendaraan
+│   └── Kembali
 ├── Laporan Pajak
+│   ├── Pembayaran Pajak
+│   ├── Hitung Denda Keterlambatan
+│   ├── Riwayat Pembayaran
+│   └── Kembali
+├── Cari Data Pengguna
+│   ├── Cari Berdasarkan Plat Nomor
+│   └── Cari Berdasarkan Nama Pemilik
 └── Logout
 
 PENGGUNA
-├── Beranda
-├── Data Kendaraan
+├── Daftar Kendaraan Saya
 ├── Pembayaran Pajak
 ├── Perhitungan Denda
 ├── Riwayat Pembayaran
-├── Pencarian Data
 └── Logout
 ```
 
@@ -132,14 +137,14 @@ Password : 12345678
 
 ## 👥 Tim Pengembang
 
-| No | Nama | NIM | Peran |
-|---|---|---|---|
-| 1 | Muhamad Alfian Maulana | F1D02510077 | Ketua |
-| 2 | Asmaul Husnah | F1D02510106 | Anggota |
-| 3 | Wildan Afandika | F1D02510141 | Anggota |
-| 4 | Lalu Helmi Firdaus | F1D02510119 | Anggota |
-| 5 | Tiha Karyati | F1D02510028 | Anggota |
-| 6 | Heni Patun Pidani | F1D02510009 | Anggota |
-| 7 | Edgar Dave Aipassa | F1D02510111 | Anggota |
+| No | Nama | NIM | Peran | Bagian yang Dikerjakan |
+|---|---|---|---|---|
+| 1 | Muhamad Alfian Maulana | F1D02510077 | Ketua | Menu Pengguna |
+| 2 | Asmaul Husnah | F1D02510106 | Anggota | Tambah & Edit Kendaraan (Admin) |
+| 3 | Wildan Afandika | F1D02510141 | Anggota | Menu Login & Fitur Navigasi `getch()` |
+| 4 | Lalu Helmi Firdaus | F1D02510119 | Anggota | Lihat & Hapus Kendaraan (Admin) |
+| 5 | Tiha Karyati | F1D02510028 | Anggota | Cari Data Pengguna (Admin) |
+| 6 | Heni Patun Pidani | F1D02510009 | Anggota | Laporan Pajak (Admin) |
+| 7 | Edgar Dave Aipassa | F1D02510111 | Anggota | - |
 
 ---
